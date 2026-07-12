@@ -4,7 +4,7 @@
 
 ## 订阅地址
 
-| 客户端 | 文件 | 原始订阅地址 |
+| 客户端 | 文件 | 订阅地址 |
 |---|---|---|
 | Quantumult X | `rules/QuantumultX/AI.list` | `https://raw.githubusercontent.com/joack-michel/AI-Rules/main/rules/QuantumultX/AI.list` |
 | Shadowrocket | `rules/Shadowrocket/AI.list` | `https://raw.githubusercontent.com/joack-michel/AI-Rules/main/rules/Shadowrocket/AI.list` |
