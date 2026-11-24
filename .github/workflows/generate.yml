@@ -1,0 +1,38 @@
+name: Generate AI rules
+on:
+  push:
+    branches: [main]
+    paths: ['data/rules.json', 'scripts/generate.mjs']
+  pull_request:
+    paths: ['data/rules.json', 'scripts/generate.mjs', 'rules/**', 'README.md']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - run: node scripts/generate.mjs --check
+  generate:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: generate-ai-rules-main
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: main
+      - run: node scripts/generate.mjs && node scripts/generate.mjs --check
+      - name: Publish generated rules
+        run: |
+          git add -- rules README.md
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Regenerate AI routing rules'
+          git push origin HEAD:main

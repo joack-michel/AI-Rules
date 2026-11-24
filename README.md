@@ -10,11 +10,12 @@
 | Shadowrocket | `rules/Shadowrocket/AI.list` | `https://raw.githubusercontent.com/joack-michel/AI-Rules/main/rules/Shadowrocket/AI.list` |
 | Clash / Mihomo | `rules/Clash/AI_Classical.yaml` | `https://raw.githubusercontent.com/joack-michel/AI-Rules/main/rules/Clash/AI_Classical.yaml` |
 
-当前共 **54 条规则**：
-
-- OpenAI：35 条
-- Gemini：14 条
-- Claude / Anthropic：5 条
+<!-- RULE-COUNTS:START -->
+| 版本 | OpenAI | Gemini | Claude / Anthropic | 总计 |
+|---|---:|---:|---:|---:|
+| AI | 47 | 17 | 5 | 69 |
+| AI_Precise | 45 | 17 | 5 | 67 |
+<!-- RULE-COUNTS:END -->
 
 ## Quantumult X
 
@@ -64,9 +65,34 @@ rules:
 - `claude.com`
 - `claudeusercontent.com`
 
-## 兼容性说明
+## 版本选择与维护
 
-为了保持原有 OpenAI 分流行为，本仓库完整保留上游规则。上游 OpenAI 列表包含 `stripe.com`、`sentry.io`、`intercom.io` 等共享第三方服务，因此少量非 OpenAI 流量也可能命中 AI 策略组。
+原有三个订阅地址保持不变（AI 兼容版），保留历史规则，并补充官方文档中的登录、验证码与 Gemini 服务主机。官方防火墙允许列表不等同于专用代理分流列表；第三方共享域名仍可能匹配非 AI 流量。
+
+如需减少误分流，可任选下面的精准版订阅（不要与兼容版同时绑定到同一策略）：
+
+| 客户端 | 精准版订阅地址 |
+|---|---|
+| Quantumult X | https://raw.githubusercontent.com/joack-michel/AI-Rules/main/rules/QuantumultX/AI_Precise.list |
+| Shadowrocket | https://raw.githubusercontent.com/joack-michel/AI-Rules/main/rules/Shadowrocket/AI_Precise.list |
+| Clash / Mihomo | https://raw.githubusercontent.com/joack-michel/AI-Rules/main/rules/Clash/AI_Precise_Classical.yaml |
+
+精准版不再使用整个 AS20473；保留历史两个 IP-CIDR，将 Stripe、Sentry 与 Google 的部分宽泛规则缩小到具体主机，并移除 auth0.com 和 algolia.net 的全域匹配。仍保留官方明确列出的 Intercom 等共享依赖。精准版可能影响旧登录、支付、搜索和语音场景；如异常可切回兼容版。两版均保留 usercontent.goog。
+
+OpenAI 官方语音 IP 清单： https://openai.com/chatgpt-voice.json 。本次未能验证其内容，暂不自动覆盖历史 IP；未进行客户端实测。UDP 3478 支持及 WebSocket TCP 443 通行仍需客户端和代理链支持。
+
+规则唯一数据源：`data/rules.json`。修改源文件及 updated 日期后，运行：
+
+```sh
+node scripts/generate.mjs
+node scripts/generate.mjs --check
+```
+
+生成器会同步六份订阅文件及本 README 的规则数量，并检查重复、基本格式及 IP 语法。不要直接修改生成的订阅文件。
+
+官方参考：
+- [OpenAI 网络要求](https://help.openai.com/en/articles/9247338-network-recommendations-for-chatgpt-errors-on-web-and-apps)
+- [Gemini 防火墙设置](https://knowledge.workspace.google.com/admin/generative-ai/gemini-app/gemini-app-firewall-settings)
 
 ## 来源与许可
 
