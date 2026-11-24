@@ -77,30 +77,6 @@
       "DOMAIN-SUFFIX,claudeusercontent.com"
     ]
   },
-  "precise": {
-    "remove": [
-      "IP-ASN,20473",
-      "DOMAIN-SUFFIX,stripe.com",
-      "DOMAIN-SUFFIX,sentry.io",
-      "DOMAIN-SUFFIX,auth0.com",
-      "DOMAIN-SUFFIX,algolia.net",
-      "DOMAIN-SUFFIX,apis.google.com",
-      "DOMAIN-KEYWORD,colab",
-      "DOMAIN-KEYWORD,generativelanguage"
-    ],
-    "add": {
-      "OpenAI": [
-        "DOMAIN,js.stripe.com",
-        "DOMAIN,o207216.ingest.sentry.io",
-        "DOMAIN,o33249.ingest.sentry.io"
-      ],
-      "Gemini": [
-        "DOMAIN,apis.google.com",
-        "DOMAIN,colab.research.google.com",
-        "DOMAIN,generativelanguage.googleapis.com"
-      ]
-    }
-  },
   "sources": [
     "https://github.com/blackmatrix7/ios_rule_script",
     "https://github.com/ACL4SSR/ACL4SSR",

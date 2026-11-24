@@ -5,7 +5,6 @@ import { dirname } from 'node:path';
 import { isIP } from 'node:net';
 import { fileURLToPath } from 'node:url';
 process.chdir(fileURLToPath(new URL('../', import.meta.url)));
-function sortRules(a){const order=["DOMAIN","DOMAIN-SUFFIX","DOMAIN-KEYWORD","IP-CIDR","IP-CIDR6","IP-ASN"];return [...a].sort((a,b)=>order.indexOf(a.split(",")[0])-order.indexOf(b.split(",")[0])||(a<b?-1:a>b?1:0));}
 function generate(data){
  const expected=["OpenAI","Gemini","Claude / Anthropic"];
  const types=["DOMAIN","DOMAIN-SUFFIX","DOMAIN-KEYWORD","IP-CIDR","IP-CIDR6","IP-ASN"];
@@ -22,16 +21,12 @@ function generate(data){
   }
   return seen;
  }
- const base=validate(data.groups);
+ validate(data.groups);
  if(!/^\d{4}-\d{2}-\d{2}$/.test(data.updated))throw Error("Invalid date");
- const remove=new Set(data.precise.remove);
- for(const rule of remove)if(!base.has(rule))throw Error("Precise removal missing: "+rule);
- for(const key of Object.keys(data.precise.add))if(!expected.includes(key))throw Error("Invalid precise group");
- const precise=Object.fromEntries(expected.map(g=>[g,sortRules([...data.groups[g].filter(r=>!remove.has(r)),...(data.precise.add[g]||[])])]));
- validate(precise);
  const output={};
  const summary={};
- for(const [profile,g] of [["AI",data.groups],["AI_Precise",precise]]){
+ {
+  const profile="AI", g=data.groups;
   const count=Object.values(g).reduce((n,r)=>n+r.length,0);
   summary[profile]={total:count,...Object.fromEntries(expected.map(x=>[x,g[x].length]))};
   for(const [client,ext] of [["QuantumultX",".list"],["Shadowrocket",".list"],["Clash","_Classical.yaml"]]){
@@ -45,7 +40,7 @@ function generate(data){
  return {output,summary};
 }
 const data = JSON.parse(readFileSync('data/rules.json', 'utf8'));
-for (const rules of [...Object.values(data.groups), ...Object.values(data.precise.add)]) {
+for (const rules of Object.values(data.groups)) {
  for (const r of rules) {
   const [type,value] = r.split(',');
   if (type === 'IP-CIDR' || type === 'IP-CIDR6') {

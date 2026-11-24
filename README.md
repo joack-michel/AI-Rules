@@ -14,7 +14,6 @@
 | 版本 | OpenAI | Gemini | Claude / Anthropic | 总计 |
 |---|---:|---:|---:|---:|
 | AI | 47 | 17 | 5 | 69 |
-| AI_Precise | 45 | 17 | 5 | 67 |
 <!-- RULE-COUNTS:END -->
 
 ## Quantumult X
@@ -65,19 +64,11 @@ rules:
 - `claude.com`
 - `claudeusercontent.com`
 
-## 版本选择与维护
+## 规则维护
 
-原有三个订阅地址保持不变（AI 兼容版），保留历史规则，并补充官方文档中的登录、验证码与 Gemini 服务主机。官方防火墙允许列表不等同于专用代理分流列表；第三方共享域名仍可能匹配非 AI 流量。
+三个订阅地址保持不变，保留历史规则，并补充官方文档中的登录、验证码与 Gemini 服务主机。官方防火墙允许列表不等同于专用代理分流列表；第三方共享域名仍可能匹配非 AI 流量。
 
-如需减少误分流，可任选下面的精准版订阅（不要与兼容版同时绑定到同一策略）：
-
-| 客户端 | 精准版订阅地址 |
-|---|---|
-| Quantumult X | https://raw.githubusercontent.com/joack-michel/AI-Rules/main/rules/QuantumultX/AI_Precise.list |
-| Shadowrocket | https://raw.githubusercontent.com/joack-michel/AI-Rules/main/rules/Shadowrocket/AI_Precise.list |
-| Clash / Mihomo | https://raw.githubusercontent.com/joack-michel/AI-Rules/main/rules/Clash/AI_Precise_Classical.yaml |
-
-精准版不再使用整个 AS20473；保留历史两个 IP-CIDR，将 Stripe、Sentry 与 Google 的部分宽泛规则缩小到具体主机，并移除 auth0.com 和 algolia.net 的全域匹配。仍保留官方明确列出的 Intercom 等共享依赖。精准版可能影响旧登录、支付、搜索和语音场景；如异常可切回兼容版。两版均保留 usercontent.goog。
+为兼容历史登录、支付及语音场景，暂保留共享服务后缀、AS20473 和历史 IP 规则；因此部分非 AI 流量可能命中 AI 策略组。保留 `usercontent.goog`。
 
 OpenAI 官方语音 IP 清单： https://openai.com/chatgpt-voice.json 。本次未能验证其内容，暂不自动覆盖历史 IP；未进行客户端实测。UDP 3478 支持及 WebSocket TCP 443 通行仍需客户端和代理链支持。
 
@@ -88,7 +79,7 @@ node scripts/generate.mjs
 node scripts/generate.mjs --check
 ```
 
-生成器会同步六份订阅文件及本 README 的规则数量，并检查重复、基本格式及 IP 语法。不要直接修改生成的订阅文件。
+生成器会同步三份订阅文件及本 README 的规则数量，并检查重复、基本格式及 IP 语法。不要直接修改生成的订阅文件。
 
 官方参考：
 - [OpenAI 网络要求](https://help.openai.com/en/articles/9247338-network-recommendations-for-chatgpt-errors-on-web-and-apps)
