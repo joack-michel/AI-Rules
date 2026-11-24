@@ -10,10 +10,10 @@
 | Shadowrocket | `rules/Shadowrocket/AI.list` | `https://raw.githubusercontent.com/joack-michel/AI-Rules/main/rules/Shadowrocket/AI.list` |
 | Clash / Mihomo | `rules/Clash/AI_Classical.yaml` | `https://raw.githubusercontent.com/joack-michel/AI-Rules/main/rules/Clash/AI_Classical.yaml` |
 
-当前共 **53 条规则**：
+当前共 **54 条规则**：
 
 - OpenAI：35 条
-- Gemini：13 条
+- Gemini：14 条
 - Claude / Anthropic：5 条
 
 ## Quantumult X
@@ -75,4 +75,4 @@ rules:
 - [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
 - [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)（用于核对新增 Claude 域名）
 
-规则文件属于对上游 GPL-2.0 内容的整理和修改，继续按 **GNU GPL v2.0** 分发。修改日期：2026-07-12。
+规则文件属于对上游 GPL-2.0 内容的整理和修改，继续按 **GNU GPL v2.0** 分发。修改日期：2026-11-24。

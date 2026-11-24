@@ -2,9 +2,9 @@
 # DESCRIPTION: OpenAI + Gemini + Claude / Anthropic
 # AUTHOR: joack-michel
 # SOURCE: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2026-07-12
+# UPDATED: 2026-11-24
 # LICENSE: GPL-2.0
-# TOTAL: 53
+# TOTAL: 54
 
 # OpenAI
 DOMAIN,browser-intake-datadoghq.com
@@ -54,6 +54,7 @@ DOMAIN-SUFFIX,gemini.google.com
 DOMAIN-SUFFIX,generativeai.google
 DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
 DOMAIN-SUFFIX,apis.google.com
+DOMAIN-SUFFIX,usercontent.goog
 DOMAIN-KEYWORD,colab
 DOMAIN-KEYWORD,developerprofiles
 DOMAIN-KEYWORD,generativelanguage

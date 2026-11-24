@@ -2,10 +2,10 @@
 # DESCRIPTION: OpenAI + Gemini + Claude / Anthropic
 # AUTHOR: joack-michel
 # SOURCE: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2026-07-12
+# UPDATED: 2026-11-24
 # POLICY: AI
 # LICENSE: GPL-2.0
-# TOTAL: 53
+# TOTAL: 54
 
 # OpenAI
 HOST,browser-intake-datadoghq.com,AI
@@ -55,6 +55,7 @@ HOST-SUFFIX,gemini.google.com,AI
 HOST-SUFFIX,generativeai.google,AI
 HOST-SUFFIX,proactivebackend-pa.googleapis.com,AI
 HOST-SUFFIX,apis.google.com,AI
+HOST-SUFFIX,usercontent.goog,AI
 HOST-KEYWORD,colab,AI
 HOST-KEYWORD,developerprofiles,AI
 HOST-KEYWORD,generativelanguage,AI
